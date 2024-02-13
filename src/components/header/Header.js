@@ -12,7 +12,7 @@ function Header(props) {
             <Nav.Link>ABOUT</Nav.Link>
           </Nav>
         </Container>
-        <Button variant="outline-primary dark">cart</Button><Badge bg="dark">0</Badge>
+        <Button onClick={props.onCartOpen} variant="outline-primary dark">cart</Button><Badge bg="dark">0</Badge>
       </Navbar>
     </header>
   );
