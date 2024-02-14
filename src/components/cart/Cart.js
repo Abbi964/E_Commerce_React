@@ -1,44 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
+import CartContext from "../../store/cart-context";
 
 function Cart(porps) {
-  const cartElements = [
-    {
-      id : 1,
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-      quantity: 2,
-    },
-    {
-        id : 2,
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-      quantity: 3,
-    },
-    {
-      id : 3,
-      title: "Yellow and Black Colors",
-      price: 70,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-      quantity: 1,
-    },
-  ];
+  const cartCtx = useContext(CartContext)
 
-  const [items, setItems] = useState(cartElements)
+  // showing total price
+  let totalPrice = 0;
+  cartCtx.items.forEach((item)=>{
+    totalPrice += (item.price * item.quantity)
+  })
 
   function removeItemHandler(e){
     const id = e.target.parentElement.parentElement.id
-    setItems((items)=>{
-        let newItems = items.filter((item)=>{
-            return item.id !== +id
-        })
-        return newItems
-    })
+    
+    cartCtx.removeFromCart(id)
   }
 
   return (
@@ -50,8 +26,8 @@ function Cart(porps) {
                 <Col className="border-bottom">PRICE</Col>
                 <Col className="border-bottom">QUANTITY</Col>
             </Row>
-            {items.map((item,index)=>{
-               return (<Row id={item.id} className="mt-2">
+            {cartCtx.items.map((item,index)=>{
+               return (<Row key={item.id} id={item.id} className="mt-2">
                     <Col>
                         <div className="d-flex">
                             <Image style={{width:'55%'}} fluid src={item.imageUrl} rounded/>
@@ -62,15 +38,15 @@ function Cart(porps) {
                         <span>{item.price}</span>
                     </Col>
                     <Col>
-                        <input style={{width:'40px'}} defaultValue='1' min='1' type="number"/>
-                        <Button onClick={removeItemHandler} size="sm" className="ms-2" bg='dark' variant="danger">Remove</Button>
+                        <input style={{width:'40px'}} defaultValue={item.quantity} min='1' type="number"/>
+                        <Button onClick={removeItemHandler}  size="sm" className="ms-2" bg='dark' variant="danger">Remove</Button>
                     </Col>
                 </Row>)
             })}
             <Row className="mt-2 mb-3">
                 <Col></Col>
                 <Col></Col>
-                <Col>{`Total  $${27.98}`}</Col>
+                <Col>{`Total  $${totalPrice}`}</Col>
             </Row>
         </Container>
         <div className="d-flex justify-content-center mb-3">

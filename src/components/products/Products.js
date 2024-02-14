@@ -1,33 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Button, Card, Container } from "react-bootstrap";
+import ProductContext from "../../store/product-context";
+import CartContext from "../../store/cart-context";
 
 function Products(props) {
-  const productsArr = [
-    {
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-    },
-    {
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-    },
-    {
-      title: "Yellow and Black Colors",
-      price: 70,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-    },
-    {
-      title: "Blue Color",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-    },
-  ];
+  const prodCtx = useContext(ProductContext)
+  const cartCtx = useContext(CartContext)
+
+
+  function addToCartHandler(e){
+    let id = +e.target.parentElement.parentElement.id
+
+    // getting product from prodContext
+    let result = prodCtx.products.filter((prod)=>{
+      return prod.id === id
+    })
+    let prod = result[0]
+
+    cartCtx.addToCart(prod)
+  }
 
   return (
     <Fragment>
@@ -42,14 +33,14 @@ function Products(props) {
           <h2>Music</h2>
         </div>
         <div id="productDiv" className="d-flex mt-3 justify-content-center" style={{flexWrap:'wrap'}}>
-            {productsArr.map((product)=>{
+            {prodCtx.products.map((product)=>{
                 return (
-                    <Card className="m-5" style={{width:'18rem',border:'none'}}>
+                    <Card id={product.id} key={product.id} className="m-5" style={{width:'18rem',border:'none'}}>
                         <Card.Title>{product.title}</Card.Title>
                         <Card.Img src={product.imageUrl}></Card.Img>
                         <Card.Body className="d-flex justify-content-between">
                             <Card.Text>{`$${product.price}`}</Card.Text>
-                            <Button>ADD TO CART</Button>
+                            <Button onClick={addToCartHandler}>ADD TO CART</Button>
                         </Card.Body>
                     </Card>
                 )
