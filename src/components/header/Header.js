@@ -18,7 +18,7 @@ function Header(props) {
       <Navbar variant="dark" bg="dark" expand="lg">
         <Container style={{paddingLeft : '22rem',minHeight : '40px'}}>
           <Nav style={{ fontWeight:'bold',width: '60%', justifyContent: 'space-evenly', alignItems: 'center' }}>
-            <Link className={classes.nav_link} >HOME</Link>
+            <Link className={classes.nav_link} to='/home'>HOME</Link>
             <Link className={classes.nav_link} to='/'>STORE</Link>
             <Link className={classes.nav_link} to='/about'>ABOUT</Link>
           </Nav>
