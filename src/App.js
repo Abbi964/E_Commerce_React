@@ -1,24 +1,19 @@
-import React, { Fragment, useContext} from "react";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import Header from "./components/header/Header";
-import Products from "./components/products/Products";
-import Footer from "./components/footer/Footer";
-import Cart from "./components/cart/Cart";
-import CartContext from "./store/cart-context";
-import ProductContextProvider from "./store/ProductContextProvider";
+import Store from "./pages/Store";
+import About from "./pages/About";
+
+// creating routes
+const router = createBrowserRouter([
+  {path : '/' , element : <Store/>},
+  {path : '/about', element : <About/>}
+])
 
 function App() {
-  const cartCtx = useContext(CartContext)
 
   return (
-    <Fragment>
-      <Header/>
-      {cartCtx.isCartActive && <Cart/>}
-      <ProductContextProvider>
-        <Products/>
-      </ProductContextProvider>
-      <Footer/>
-    </Fragment>
+    <RouterProvider router={router}/>
   );
 }
 
