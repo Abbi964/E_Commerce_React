@@ -1,0 +1,9 @@
+
+  /* Define custom scrollbar styles (optional) */
+  ::-webkit-scrollbar {
+    width: 1px; /* Width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #000000; /* Track color */
+  }

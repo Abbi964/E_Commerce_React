@@ -2,3 +2,7 @@
     text-decoration: none;
     color: white;
 }
+
+.active{
+    border-bottom: 3px solid white;
+}
