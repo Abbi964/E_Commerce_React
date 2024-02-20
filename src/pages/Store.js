@@ -4,7 +4,6 @@ import CartContext from "../store/cart-context";
 import Cart from "../components/cart/Cart";
 import Products from "../components/products/Products";
 import Footer from '../components/footer/Footer'
-import ProductContextProvider from "../store/ProductContextProvider";
 
 function Store() {
     const cartCtx = useContext(CartContext)
@@ -13,9 +12,7 @@ function Store() {
     <Fragment>
       <Header cartBtnVisible={true} />
       {cartCtx.isCartActive && <Cart />}
-      <ProductContextProvider>
-        <Products />
-      </ProductContextProvider>
+      <Products />
       <Footer />
     </Fragment>
   );

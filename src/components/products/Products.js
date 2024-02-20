@@ -2,6 +2,7 @@ import React, { Fragment, useContext } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import ProductContext from "../../store/product-context";
 import CartContext from "../../store/cart-context";
+import {Link} from 'react-router-dom'
 
 function Products(props) {
   const prodCtx = useContext(ProductContext)
@@ -20,6 +21,7 @@ function Products(props) {
     cartCtx.addToCart(prod)
   }
 
+
   return (
     <Fragment>
       <div
@@ -37,7 +39,7 @@ function Products(props) {
                 return (
                     <Card id={product.id} key={product.id} className="m-5" style={{width:'18rem',border:'none'}}>
                         <Card.Title>{product.title}</Card.Title>
-                        <Card.Img src={product.imageUrl}></Card.Img>
+                        <Link to={`/product/${product.id}`}><Card.Img src={product.imageUrl}></Card.Img></Link>
                         <Card.Body className="d-flex justify-content-between">
                             <Card.Text>{`$${product.price}`}</Card.Text>
                             <Button onClick={addToCartHandler}>ADD TO CART</Button>

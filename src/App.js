@@ -5,6 +5,7 @@ import Store from "./pages/Store";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         </Route>
         <Route path="/contact-us">
           <ContactUs/>
+        </Route>
+        <Route path="/product/:productId">
+          <Product/>
         </Route>
       </Switch>
     </Fragment>
